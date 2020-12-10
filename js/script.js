@@ -26,7 +26,7 @@ function showPage(students, pageNum) {
 			const studentHTML = `
         <li class="student-item cf">
           <div class="student-details">
-            <img class="avatar" src="${student.picture.thumbnail}" alt="Profile Picture" />
+            <img class="avatar" src="${student.picture.large}" alt="Profile Picture" />
             <h3>${fullName}</h3>
             <span class="email">${student.email}</span>
           </div>
@@ -35,6 +35,8 @@ function showPage(students, pageNum) {
           </div>
         </li>
       `;
+
+			studentList.innerHTML += studentHTML;
 		}
 	});
 }
@@ -45,3 +47,4 @@ This function will create and insert/append the elements needed for the paginati
 */
 
 // Call functions
+showPage(data, 2);
