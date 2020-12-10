@@ -84,7 +84,7 @@ function addPagination(students) {
 			const pageBtns = pageBtnUl.querySelectorAll('button');
 			pageBtns.forEach((btn) => btn.classList.remove('active'));
 			target.classList.add('active');
-			showPage(data, target.textContent);
+			showPage(students, target.textContent);
 		}
 	});
 }
