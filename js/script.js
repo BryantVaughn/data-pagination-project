@@ -11,7 +11,8 @@ For assistance:
 
 /*
  * `showPage` function
- * This function creates and inserts/appends the elements needed to display a "page" of nine students
+ * This function creates and inserts/appends the elements needed to display a "page" of nine students.
+ * It builds each student block as a string and then appends it to the student-list ul.
  */
 function showPage(students, pageNum) {
 	let startIdx = pageNum * 9 - 9;
@@ -22,7 +23,10 @@ function showPage(students, pageNum) {
 
 	students.forEach((student, idx) => {
 		if (idx >= startIdx && idx < endIdx) {
+			// Pull out student name into single variable
 			const fullName = `${student.name.first} ${student.name.last}`;
+
+			// Build student card HTML with student's info
 			const studentHTML = `
         <li class="student-item cf">
           <div class="student-details">
@@ -36,6 +40,7 @@ function showPage(students, pageNum) {
         </li>
       `;
 
+			// Add student card to page
 			studentList.innerHTML += studentHTML;
 		}
 	});
@@ -43,14 +48,18 @@ function showPage(students, pageNum) {
 
 /*
  * `addPagination` function
- * This function creates and inserts/appends the elements needed for the pagination buttons
+ * This function creates and inserts/appends the elements needed for the pagination buttons.
+ * An event listener is attached to the pagination button holder to allow users to change between
+ * pages.
  */
 function addPagination(students) {
+	// Get total pages needed to display all items in student list
 	const totalPageBtns = Math.ceil(students.length / 9);
 
 	const pageBtnUl = document.querySelector('.link-list');
 	pageBtnUl.innerHTML = '';
 
+	// Build pagination buttons and append to container
 	for (let i = 1; i <= totalPageBtns; i++) {
 		const li = document.createElement('li');
 
@@ -62,10 +71,15 @@ function addPagination(students) {
 		pageBtnUl.appendChild(li);
 	}
 
+	// Select first page button and apply active class
 	pageBtnUl.querySelector('[type="button"]').classList.add('active');
 
+	// event listener
 	pageBtnUl.addEventListener('click', (evt) => {
+		// Pull target out of event obj
 		const { target } = evt;
+
+		// Only listen for clicks on button elements
 		if (target.tagName === 'BUTTON') {
 			const pageBtns = pageBtnUl.querySelectorAll('button');
 			pageBtns.forEach((btn) => btn.classList.remove('active'));
