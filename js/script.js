@@ -10,9 +10,9 @@ For assistance:
 */
 
 /*
-Create the `showPage` function
-This function will create and insert/append the elements needed to display a "page" of nine students
-*/
+ * `showPage` function
+ * This function creates and inserts/appends the elements needed to display a "page" of nine students
+ */
 function showPage(students, pageNum) {
 	let startIdx = pageNum * 9 - 9;
 	let endIdx = pageNum * 9;
@@ -42,9 +42,39 @@ function showPage(students, pageNum) {
 }
 
 /*
-Create the `addPagination` function
-This function will create and insert/append the elements needed for the pagination buttons
-*/
+ * `addPagination` function
+ * This function creates and inserts/appends the elements needed for the pagination buttons
+ */
+function addPagination(students) {
+	const totalPageBtns = Math.ceil(students.length / 9);
+
+	const pageBtnUl = document.querySelector('.link-list');
+	pageBtnUl.innerHTML = '';
+
+	for (let i = 1; i <= totalPageBtns; i++) {
+		const li = document.createElement('li');
+
+		const pageBtn = document.createElement('button');
+		pageBtn.type = 'button';
+		pageBtn.textContent = i;
+
+		li.appendChild(pageBtn);
+		pageBtnUl.appendChild(li);
+	}
+
+	pageBtnUl.querySelector('[type="button"]').classList.add('active');
+
+	pageBtnUl.addEventListener('click', (evt) => {
+		const { target } = evt;
+		if (target.tagName === 'BUTTON') {
+			const pageBtns = pageBtnUl.querySelectorAll('button');
+			pageBtns.forEach((btn) => btn.classList.remove('active'));
+			target.classList.add('active');
+			showPage(data, target.textContent);
+		}
+	});
+}
 
 // Call functions
-showPage(data, 2);
+showPage(data, 1);
+addPagination(data);
