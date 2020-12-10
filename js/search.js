@@ -56,8 +56,8 @@ function handleSearch() {
 		handleNoResults();
 	} else {
 		showPage(filteredStudents, 1);
-		addPagination(filteredStudents);
 	}
+	addPagination(filteredStudents);
 }
 
 /***
